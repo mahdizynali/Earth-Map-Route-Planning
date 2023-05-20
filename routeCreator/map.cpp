@@ -5,8 +5,9 @@ Iran::Iran() {
     Mat map = imread("/home/maximum/Desktop/Iran-Map-Route-Planning/Iran.png");
     if (map.empty()) { 
         cout<<"Error loading the map"<<endl;
-        return -1; 
     }
+
+    setMouseCallback("Iran", mouseAttacher, this);
 }
 
 Mat Iran::Access() {
@@ -22,7 +23,7 @@ void Iran::drawCityCenter() {
     const int width = 10;
     const int height = 10;
     if (flagCenter)
-        rectangle(iran.Access(), Point(cityCenter[0].x, cityCenter[0].y), Point(cityCenter[0].x+width, cityCenter[0].y+height),
+        rectangle(map, Point(cityCenter[0].x, cityCenter[0].y), Point(cityCenter[0].x+width, cityCenter[0].y+height),
         Scalar(0, 255, 0),1, LINE_8);
 }
 
@@ -44,5 +45,5 @@ void Iran::Mouse(int event, int x, int y, int flags){
         cout << "set a city center - position (" << x << ", " << y << ")" << endl;
         flagCenter = true;
     }
-    updateMap();
+    // updateMap();
 }

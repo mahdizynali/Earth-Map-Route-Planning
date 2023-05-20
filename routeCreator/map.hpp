@@ -19,7 +19,7 @@ class Iran {
         Iran();
         Mat Access();
         void updateMap();
-        void drawCityCenter()
+        void drawCityCenter();
         void Mouse(int ,int ,int ,int);
         static void mouseAttacher(int ,int ,int ,int ,void *);
 };
