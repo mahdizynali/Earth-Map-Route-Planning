@@ -17,8 +17,11 @@ class Iran {
 
     public:
         Iran();
-        void updateMap();
         Mat Access();
+        void updateMap();
+        void drawCityCenter()
+        void Mouse(int ,int ,int ,int);
+        static void mouseAttacher(int ,int ,int ,int ,void *);
 };
 
 #endif // MAP_HPP
