@@ -11,10 +11,13 @@ class Iran {
 
     private:
         Mat map;
+        bool flagCenter = false;
+        vector <Point> roadsPoint;
+        vector <Point> cityCenter;
 
     public:
         Iran();
-        void fieldCreate();
+        void updateMap();
         Mat Access();
 };
 
