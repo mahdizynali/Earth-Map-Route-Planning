@@ -20,7 +20,7 @@ int Country::updateMap() {
     double refreshRate = 20.0 / 1000.0;
     while (true) {
         sleep_for(milliseconds((int)refreshRate * 1000));
-        drawCityCenter();
+        drawRoutes();
         
         switch (waitKey(1)){
 
@@ -39,37 +39,64 @@ int Country::updateMap() {
     }
 }
 
-void Country::drawCityCenter() {
+void Country::drawRoutes() {
+    Point tmp;
+    tmp = cityCenter;
+    map.copyTo(roads);
+    if (flagRoads) {
+        circle(roads, cityCenter, 8, Scalar(0, 255, 0), FILLED);
+        for(int i=0; i<wheel.size(); i++){
+            // circle(roads, wheel[i], 3, Scalar(255, 0, 0), FILLED);
+            line(roads, tmp, wheel[i], Scalar(255, 0, 0),3, LINE_8);
+            tmp = wheel[i];
+        }
+    }
     
-    map.copyTo(Ccenter);
-    if (flagCenter)
-        circle(Ccenter, cityCenter, 8, Scalar(0, 255, 0), FILLED);
-    
-    imshow("RouadCreator", Ccenter);
+    imshow("RouadCreator", roads);
 }
 
 
 void Country::Mouse(int event, int x, int y, int flags){
 
     // if (flagNewRoute == 1) {
-        switch(event){
+    
+    mousePoint.x = x;
+    mousePoint.y = y;
+    if (event == EVENT_LBUTTONDOWN){
+        cityCenter.x = x;
+        cityCenter.y = y;
+        flagRoads = true;
+        cout << "position (" << x << ", " << y << ")" << endl;
+    }
+    else if (event == EVENT_RBUTTONDOWN){
+        flagRoads = false;
+        cout << "position (" << x << ", " << y << ")" << endl;
+    }
+    else if (event == EVENT_MOUSEMOVE) {
+        if (flagRoads == true)
+            wheel.push_back(Point(x,y));
+    }
+        // switch(event){
 
-            case EVENT_LBUTTONDOWN :
-                cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-                break;
+        //     case EVENT_LBUTTONDOWN :
+        //         mousePoint.x = x;
+        //         mousePoint.y = y;
+        //         flagRoads = true;
+        //         cout << "position (" << x << ", " << y << ")" << endl;
+        //         break;
 
-            case EVENT_RBUTTONDOWN :
-                cout << "Right button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-                break;
+        //     case EVENT_RBUTTONDOWN :
+        //         cout << "Right button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
+        //         break;
 
-            case EVENT_MBUTTONDOWN :
-                // cityCenter.push_back(Point(x,y));
-                cityCenter.x = x;
-                cityCenter.y = y;
-                cout << "set a city center - position (" << x << ", " << y << ")" << endl;
-                flagCenter = true;
-                break;
-        }
+        //     case EVENT_MBUTTONDOWN :
+        //         cout << "set a city center - position (" << x << ", " << y << ")" << endl;
+        //         break;
+
+        //     case EVENT_MOUSEMOVE :
+        //         cout << "wheel - position (" << x << ", " << y << ")" << endl;
+        //         break;
+        // }
     // }
     // else {cout<<"Mouse Flag is Off !!"<<endl;}
     updateMap();

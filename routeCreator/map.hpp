@@ -18,17 +18,18 @@ class Country {
 
     private:
         Mat map;
-        Mat Ccenter; 
-        bool flagCenter = false;
+        Mat roads; 
+        bool flagRoads = false;
         int flagNewRoute = -1;
-        vector <Point> roadsPoint;
+        Point mousePoint;
         Point cityCenter;
+        vector <Point> wheel;
 
     public:
         Country(string);
         Mat Access();
         int updateMap();
-        void drawCityCenter();
+        void drawRoutes();
         static void mouseAttacher(int ,int ,int ,int ,void *);
         void Mouse(int ,int ,int ,int);
 };
