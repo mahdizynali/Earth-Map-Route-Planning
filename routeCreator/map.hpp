@@ -4,10 +4,17 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include <string>
+#include <chrono>
+#include <cmath>
+#include <thread>
+
 using namespace std;
 using namespace cv;
+using namespace chrono;
+using namespace this_thread;
 
-class country {
+class Country {
 
     private:
         Mat map;
@@ -16,12 +23,12 @@ class country {
         vector <Point> cityCenter;
 
     public:
-        Iran();
+        Country(string);
         Mat Access();
         void updateMap();
         void drawCityCenter();
-        void Mouse(int ,int ,int ,int);
         static void mouseAttacher(int ,int ,int ,int ,void *);
+        void Mouse(int ,int ,int ,int);
 };
 
 #endif // MAP_HPP
