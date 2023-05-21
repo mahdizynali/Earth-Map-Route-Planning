@@ -16,12 +16,18 @@ Mat Country::Access() {
 }
 
 int Country::updateMap() {
+
     double refreshRate = 20.0 / 1000.0;
     while (true) {
         
         sleep_for(milliseconds((int)refreshRate * 1000));
         imshow("RouadCreator", map);
         switch (waitKey(1)){
+
+            case (int('m')):
+                flagNewRoute *= -1;
+                break;
+
             case (int('q')):
                 destroyAllWindows();
                 return 0;
@@ -40,23 +46,25 @@ void Country::drawCityCenter() {
 
 void Country::Mouse(int event, int x, int y, int flags){
 
-    switch(event){
+    if (flagNewRoute == 1) {
+        switch(event){
 
-        case EVENT_LBUTTONDOWN :
-            cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-            break;
+            case EVENT_LBUTTONDOWN :
+                cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
+                break;
 
-        case EVENT_RBUTTONDOWN :
-            cout << "Right button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-            break;
+            case EVENT_RBUTTONDOWN :
+                cout << "Right button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
+                break;
 
-        case EVENT_MBUTTONDOWN :
-            cityCenter.push_back(Point(x,y));
-            cout << "set a city center - position (" << x << ", " << y << ")" << endl;
-            flagCenter = true;
-            break;
+            case EVENT_MBUTTONDOWN :
+                cityCenter.push_back(Point(x,y));
+                cout << "set a city center - position (" << x << ", " << y << ")" << endl;
+                flagCenter = true;
+                break;
+        }
     }
-
+    else {cout<<"Mouse Flag is Off !!"<<endl;}
     updateMap();
 }
 
