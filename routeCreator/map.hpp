@@ -18,10 +18,11 @@ class Country {
 
     private:
         Mat map;
+        Mat Ccenter; 
         bool flagCenter = false;
         int flagNewRoute = -1;
         vector <Point> roadsPoint;
-        vector <Point> cityCenter;
+        Point cityCenter;
 
     public:
         Country(string);
