@@ -2,7 +2,7 @@
 
 int main() {
 
-    Iran iran;
+    Country iran;
     // namedWindow("RouadCreator", 1);
     return 0;
 }

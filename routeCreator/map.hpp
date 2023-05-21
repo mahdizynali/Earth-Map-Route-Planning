@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cv;
 
-class Iran {
+class country {
 
     private:
         Mat map;

@@ -1,25 +1,25 @@
 #include "map.hpp"
 
-Iran::Iran() {
+Country::Country() {
 
-    Mat map = imread("/home/maximum/Desktop/Iran-Map-Route-Planning/Iran.png");
+    Mat map = imread("/home/maximum/Desktop/Earth-Map-Route-Planning/Country.png");
     if (map.empty()) { 
         cout<<"Error loading the map"<<endl;
     }
 
-    setMouseCallback("Iran", mouseAttacher, this);
+    setMouseCallback("Country", mouseAttacher, this);
 }
 
-Mat Iran::Access() {
+Mat Country::Access() {
     return map;
 }
 
-void Iran::updateMap() {
+void Country::updateMap() {
     imshow("RouadCreator", map);
     waitKey(10);
 }
 
-void Iran::drawCityCenter() {
+void Country::drawCityCenter() {
     const int width = 10;
     const int height = 10;
     if (flagCenter)
@@ -27,12 +27,12 @@ void Iran::drawCityCenter() {
         Scalar(0, 255, 0),1, LINE_8);
 }
 
-void Iran::mouseAttacher(int event, int x, int y, int flags, void *data){
-    Iran *pointer = reinterpret_cast<Iran* >(data);
+void Country::mouseAttacher(int event, int x, int y, int flags, void *data){
+    Country *pointer = reinterpret_cast<Country* >(data);
     pointer -> Mouse(event, x, y, flags);
 }
 
-void Iran::Mouse(int event, int x, int y, int flags){
+void Country::Mouse(int event, int x, int y, int flags){
 
     if  ( event == EVENT_LBUTTONDOWN ){
         cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
