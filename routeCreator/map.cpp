@@ -6,7 +6,8 @@ Country::Country(string address) {
     if (map.empty()) { 
         cout<<"Error loading the map"<<endl;
     }
-    setMouseCallback("Country", mouseAttacher, this);
+    namedWindow("RouadCreator", 1);
+    setMouseCallback("RouadCreator", mouseAttacher, this);
     updateMap();
 }
 
@@ -14,16 +15,16 @@ Mat Country::Access() {
     return map;
 }
 
-void Country::updateMap() {
+int Country::updateMap() {
     double refreshRate = 20.0 / 1000.0;
     while (true) {
-        // namedWindow("RouadCreator", 1);
+        
         sleep_for(milliseconds((int)refreshRate * 1000));
         imshow("RouadCreator", map);
         switch (waitKey(1)){
             case (int('q')):
                 destroyAllWindows();
-                break;
+                return 0;
         }
     }
 }

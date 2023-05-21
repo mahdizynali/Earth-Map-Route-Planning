@@ -25,7 +25,7 @@ class Country {
     public:
         Country(string);
         Mat Access();
-        void updateMap();
+        int updateMap();
         void drawCityCenter();
         static void mouseAttacher(int ,int ,int ,int ,void *);
         void Mouse(int ,int ,int ,int);
