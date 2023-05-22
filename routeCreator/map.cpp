@@ -1,14 +1,21 @@
 #include "map.hpp"
 
-Country::Country(string address) {
+string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/routeCreator/map_image/Iran.png";
 
-    countryMap = imread(address);
-    if (countryMap.empty()) { 
-        cout<<"Error loading the map"<<endl;
-    }
+Country::Country() {
+    mapGenerator();
     namedWindow("RouadCreator", 1);
     setMouseCallback("RouadCreator", mouseAttacher, this);
     updateMap();
+}
+
+void Country::mapGenerator() {
+    countryMap = imread(image_address);
+    tmpMap = countryMap;
+    if (countryMap.empty()) { 
+        cout<<"Error loading the map"<<endl;
+        exit(0);
+    }
 }
 
 Mat Country::Access() {
@@ -23,12 +30,20 @@ int Country::updateMap() {
         drawRoutes();       
         switch (waitKey(1)){
             
-            case (int('m')):
+            case (int('n')):
                 flagNewRoute = true;
                 break;
 
             case (int('r')):
+                flagRoadLine = false;
                 route.release();
+                countryMap.release();
+                routeID = 0;
+                routeVector.clear();
+                countryMap = tmpMap;
+                imshow("tt", countryMap);
+                waitKey(0);
+                // destroyAllWindows();
                 break;
 
             case (int('q')):
