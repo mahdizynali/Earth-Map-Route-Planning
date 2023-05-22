@@ -11,7 +11,6 @@ Country::Country() {
 
 void Country::mapGenerator() {
     countryMap = imread(image_address);
-    tmpMap = countryMap;
     if (countryMap.empty()) { 
         cout<<"Error loading the map"<<endl;
         exit(0);
@@ -37,13 +36,9 @@ int Country::updateMap() {
             case (int('r')):
                 flagRoadLine = false;
                 route.release();
-                countryMap.release();
+                mapGenerator();
                 routeID = 0;
                 routeVector.clear();
-                countryMap = tmpMap;
-                imshow("tt", countryMap);
-                waitKey(0);
-                // destroyAllWindows();
                 break;
 
             case (int('q')):
