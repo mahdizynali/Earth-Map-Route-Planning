@@ -36,7 +36,7 @@ int Country::updateMap() {
                 destroyAllWindows();
                 return 0;
 
-            case (int('d')):
+            case (int('c')):
                 checkRoutes();
         }
     }
@@ -46,7 +46,7 @@ void Country::checkRoutes() {
     for(int j=0; j<routeID; j++){
         cout<<"route ID : "<<j<<endl;
         cout<<"route Points : "<<endl;
-        for(int i=0; i<(int)(routeVector.size()); i++){
+        for(int i=0; i<(int)(routeVector[j].size()); i++){
             cout<<routeVector[j][i]<<endl;
         }
         cout<<"================\n";
@@ -58,7 +58,6 @@ void Country::drawRoutes() {
     if (flagRoadLine) {
         circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
-        // cout<<"tmp : "<<tmp<<"     wheel :"<<wheel<<endl;
         tmp = wheel;
     }
     
@@ -75,16 +74,22 @@ void Country::Mouse(int event, int x, int y, int flags){
             tmp = Point(x+1,y+1);
             wheel = Point(x,y);
             flagRoadLine = true;
-
         }
         else if (event == EVENT_RBUTTONDOWN){
             routeID += 1;
             routeVector[routeID].push_back(Point(x, y));
+            for(int i=0; i<routeID; i++){
+                double distance = sqrt(pow(routeVector[i][0].x - x, 2) + pow(routeVector[i][0].y, 2));
+                if(distance <= 8){
+                    routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
+                }
+            checkRoutes();
+            }
         }
         else if (event == EVENT_MOUSEMOVE) {
             if (flagRoadLine == true){
                 wheel = Point(x,y);
-                routeVector[routeID].push_back(Point(x, y));
+                routeVector[routeID].push_back(wheel);
             }
         }
         else if (event == EVENT_MBUTTONDOWN) {
