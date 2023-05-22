@@ -8,6 +8,7 @@
 #include <chrono>
 #include <cmath>
 #include <thread>
+// #include <map>
 
 using namespace std;
 using namespace cv;
@@ -17,15 +18,15 @@ using namespace this_thread;
 class Country {
 
     private:
+        int routeID = 0;
         Mat map;
-        Mat roads; 
-        bool flagRoads = false;
+        Mat route; 
+        bool flagRoadLine = false;
         int flagNewRoute = -1;
-        Point mousePoint;
         Point tmp;
-        vector <Point> cityCenter;
+        Point cityCenter;
         vector <Point> wheel;
-        vector <int, vector<Point>> roadID;
+        vector <pair<int, Point>> routeVector;
 
     public:
         Country(string);

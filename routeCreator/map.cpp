@@ -8,8 +8,7 @@ Country::Country(string address) {
     }
     namedWindow("RouadCreator", 1);
     setMouseCallback("RouadCreator", mouseAttacher, this);
-    cityCenter.push_back(Point(0,0));
-    // tmp = cityCenter.back();
+    cityCenter = Point(0,0);
     updateMap();
 }
 
@@ -31,7 +30,7 @@ int Country::updateMap() {
                 break;
 
             case (int('r')):
-                destroyAllWindows();
+                route.release();
                 break;
 
             case (int('q')):
@@ -43,16 +42,16 @@ int Country::updateMap() {
 
 void Country::drawRoutes() {
 
-    map.copyTo(roads);
+    map.copyTo(route);
     if (flagNewRoute) {
-        circle(map, cityCenter.back(), 8, Scalar(0, 255, 0), FILLED);
+        circle(map, Point(cityCenter.x, cityCenter.y), 8, Scalar(0, 255, 0), FILLED);
         for(int i=0; i < (int)(wheel.size()); i++){
-            line(roads, tmp, wheel[i], Scalar(255, 0, 0),3, LINE_8);
+            line(route, tmp, wheel[i], Scalar(255, 0, 0),3, LINE_8);
             tmp = wheel[i];
         }
     }
     
-    imshow("RouadCreator", roads);
+    imshow("RouadCreator", route);
 }
 
 
@@ -60,21 +59,21 @@ void Country::Mouse(int event, int x, int y, int flags){
 
     if (flagNewRoute == 1) {
 
-        mousePoint.x = x;
-        mousePoint.y = y;
         if (event == EVENT_LBUTTONDOWN){
-
-            flagRoads = true;
-            cityCenter.push_back(Point(x,y));
+            flagRoadLine = true;
+            cityCenter.x = x;
+            cityCenter.y = y;
+            routeVector.push_back(make_pair(routeID, Point(cityCenter.x, cityCenter.y)));
             cout << "RightButton position (" << x << ", " << y << ")" << endl;
         }
         else if (event == EVENT_RBUTTONDOWN){
-            flagRoads = false;
-            cityCenter.push_back(Point(x,y));
+            flagRoadLine = false;
+            cityCenter.x = x;
+            cityCenter.y = y;
             cout << "LeftButton position (" << x << ", " << y << ")" << endl;
         }
         else if (event == EVENT_MOUSEMOVE) {
-            if (flagRoads == true)
+            if (flagRoadLine == true)
                 wheel.push_back(Point(x,y));
         }
         updateMap();
