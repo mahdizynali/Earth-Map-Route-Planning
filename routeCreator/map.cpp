@@ -20,10 +20,9 @@ int Country::updateMap() {
     double refreshRate = 20.0 / 1000.0;
     while (true) {
         sleep_for(milliseconds((int)refreshRate * 1000));
-        drawRoutes();
-        
+        drawRoutes();       
         switch (waitKey(1)){
-
+            
             case (int('m')):
                 flagNewRoute = true;
                 break;
@@ -43,7 +42,8 @@ int Country::updateMap() {
 }
 
 void Country::checkRoutes() {
-    for(int j=0; j<routeID; j++){
+
+    for(int j=0; j<=routeID; j++){
         cout<<"route ID : "<<j<<endl;
         cout<<"route Points : "<<endl;
         for(int i=0; i<(int)(routeVector[j].size()); i++){
@@ -54,21 +54,19 @@ void Country::checkRoutes() {
 }
 
 void Country::drawRoutes() {
+
     countryMap.copyTo(route);
     if (flagRoadLine) {
         circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
-    }
-    
+    } 
     imshow("RouadCreator", route);
 }
-
 
 void Country::Mouse(int event, int x, int y, int flags){
 
     if (flagNewRoute == 1) {
-
         if (event == EVENT_LBUTTONDOWN){
             routeVector[routeID].push_back(Point(x, y));
             tmp = Point(x+1,y+1);
@@ -83,7 +81,6 @@ void Country::Mouse(int event, int x, int y, int flags){
                 if(distance <= 8){
                     routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
                 }
-            checkRoutes();
             }
         }
         else if (event == EVENT_MOUSEMOVE) {
