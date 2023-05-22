@@ -45,7 +45,7 @@ void Country::drawRoutes() {
     map.copyTo(roads);
     if (flagRoads) {
         circle(roads, cityCenter, 8, Scalar(0, 255, 0), FILLED);
-        for(int i=0; i<wheel.size(); i++){
+        for(int i=0; i < (int)(wheel.size()); i++){
             // circle(roads, wheel[i], 3, Scalar(255, 0, 0), FILLED);
             line(roads, tmp, wheel[i], Scalar(255, 0, 0),3, LINE_8);
             tmp = wheel[i];
