@@ -10,7 +10,7 @@ class Country {
         Mat countryMap;
         Mat route; 
         bool flagRoadLine = false;
-        bool flagNewRoute = false;
+        int flagMouseCallBack = -1;
         bool flagInsideCenter = false;
         Point tmp;
         Point wheel;
