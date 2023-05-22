@@ -2,6 +2,7 @@
 
 string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/routeCreator/map_image/Iran.png";
 
+// country class constructor
 Country::Country() {
     mapGenerator();
     namedWindow("RouadCreator", 1);
@@ -9,6 +10,7 @@ Country::Country() {
     updateMap();
 }
 
+// read image of map from file and creat matrix
 void Country::mapGenerator() {
     countryMap = imread(image_address);
     if (countryMap.empty()) { 
@@ -17,10 +19,12 @@ void Country::mapGenerator() {
     }
 }
 
+// map matrix accessor
 Mat Country::Access() {
     return countryMap;
 }
 
+//update displaying frame base on refresh time and listen to keyboard commands
 int Country::updateMap() {
     
     double refreshRate = 20.0 / 1000.0;
@@ -51,6 +55,7 @@ int Country::updateMap() {
     }
 }
 
+// printout vectorialized rout map
 void Country::checkRoutes() {
 
     for(int j=0; j<=routeID; j++){
@@ -63,6 +68,7 @@ void Country::checkRoutes() {
     }
 }
 
+// draw city centers an routs base on mouse callback
 void Country::drawRoutes() {
 
     countryMap.copyTo(route);
@@ -74,6 +80,7 @@ void Country::drawRoutes() {
     imshow("RouadCreator", route);
 }
 
+// mouse intraction function that commands to draw routs
 void Country::Mouse(int event, int x, int y, int flags){
 
     if (flagNewRoute == 1) {
@@ -106,6 +113,7 @@ void Country::Mouse(int event, int x, int y, int flags){
     }
 }
 
+// mouse callback attacher function
 void Country::mouseAttacher(int event, int x, int y, int flags, void *data){
     Country *pointer = reinterpret_cast<Country* >(data);
     pointer -> Mouse(event, x, y, flags);

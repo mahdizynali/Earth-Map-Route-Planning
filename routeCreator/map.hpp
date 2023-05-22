@@ -8,7 +8,6 @@ class Country {
     private:
         int routeID = 0;
         Mat countryMap;
-        Mat tmpMap;
         Mat route; 
         bool flagRoadLine = false;
         bool flagNewRoute = false;
