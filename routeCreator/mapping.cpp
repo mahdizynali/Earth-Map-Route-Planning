@@ -1,4 +1,4 @@
-#include "map.hpp"
+#include "mapping.hpp"
 
 string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/routeCreator/map_image/Iran.png";
 

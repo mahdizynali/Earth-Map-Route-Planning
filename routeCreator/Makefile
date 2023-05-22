@@ -8,8 +8,8 @@ lIBS = $(OPENCV)
 
 all: main run
 
-main: main.o map.o
-	$(CC) $(CFLAGS) -o main main.o map.o $(lIBS)
+main: main.o mapping.o
+	$(CC) $(CFLAGS) -o main main.o mapping.o $(lIBS)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c -o $@ $< $(lIBS)
