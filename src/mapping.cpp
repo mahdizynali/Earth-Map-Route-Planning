@@ -1,6 +1,6 @@
-#include "mapping.hpp"
+#include "include/mapping.hpp"
 
-string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/routeCreator/map_image/Iran.png";
+string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
 
 // country class constructor
 Country::Country() {

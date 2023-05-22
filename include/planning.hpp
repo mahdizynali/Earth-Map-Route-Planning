@@ -7,8 +7,10 @@
 class Planning {
 
     private:
+        Country iran;
 
     public:
+        Planning();
 
 };
 
