@@ -33,7 +33,7 @@ int Country::updateMap() {
         switch (waitKey(1)){
             
             case (int('n')):
-                flagNewRoute = true;
+                flagMouseCallBack *= -1;
                 break;
 
             case (int('r')):
@@ -79,7 +79,7 @@ void Country::drawRoutes() {
 
 // mouse intraction function that commands to draw routs
 void Country::Mouse(int event, int x, int y, int flags){
-    if (flagNewRoute == 1) {
+    if (flagMouseCallBack == 1) {
         if (event == EVENT_LBUTTONDOWN){
             routeVector[routeID].push_back(Point(x, y));
             tmp = Point(x+1,y+1);
