@@ -18,7 +18,7 @@ using namespace this_thread;
 class Country {
 
     private:
-        int routeID = 0;
+        int routeID = 1;
         Mat map;
         Mat route; 
         bool flagRoadLine = false;

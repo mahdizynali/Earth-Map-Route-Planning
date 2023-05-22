@@ -8,7 +8,8 @@ Country::Country(string address) {
     }
     namedWindow("RouadCreator", 1);
     setMouseCallback("RouadCreator", mouseAttacher, this);
-    cityCenter = Point(0,0);
+    // cityCenter = Point(0,0);
+    routeVector.push_back(make_pair(0, Point(0,0)));
     updateMap();
 }
 
@@ -41,10 +42,9 @@ int Country::updateMap() {
 }
 
 void Country::drawRoutes() {
-
     map.copyTo(route);
     if (flagNewRoute) {
-        circle(map, Point(cityCenter.x, cityCenter.y), 8, Scalar(0, 255, 0), FILLED);
+        circle(map, routeVector[routeID].second, 8, Scalar(0, 255, 0), FILLED);
         for(int i=0; i < (int)(wheel.size()); i++){
             line(route, tmp, wheel[i], Scalar(255, 0, 0),3, LINE_8);
             tmp = wheel[i];
@@ -61,9 +61,9 @@ void Country::Mouse(int event, int x, int y, int flags){
 
         if (event == EVENT_LBUTTONDOWN){
             flagRoadLine = true;
-            cityCenter.x = x;
-            cityCenter.y = y;
-            routeVector.push_back(make_pair(routeID, Point(cityCenter.x, cityCenter.y)));
+            // cityCenter.x = x;
+            // cityCenter.y = y;
+            routeVector.push_back(make_pair(routeID, Point(x, y)));
             cout << "RightButton position (" << x << ", " << y << ")" << endl;
         }
         else if (event == EVENT_RBUTTONDOWN){
@@ -74,6 +74,7 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         else if (event == EVENT_MOUSEMOVE) {
             if (flagRoadLine == true)
+                // routeVector.push_back(make_pair(routeID, Point(x, y)));
                 wheel.push_back(Point(x,y));
         }
         updateMap();
