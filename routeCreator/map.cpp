@@ -24,7 +24,7 @@ Mat Country::Access() {
     return countryMap;
 }
 
-// return vector of routes
+// return vector of routes as a map <int, vector<Point>>
 map <int, vector<Point>> Country::getRouteVector() {
     return routeVector;
 }
