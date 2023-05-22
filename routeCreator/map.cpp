@@ -8,7 +8,6 @@ Country::Country(string address) {
     }
     namedWindow("RouadCreator", 1);
     setMouseCallback("RouadCreator", mouseAttacher, this);
-    
     updateMap();
 }
 
@@ -43,11 +42,10 @@ int Country::updateMap() {
 void Country::drawRoutes() {
     countryMap.copyTo(route);
     if (flagRoadLine) {
-        // for(int i=0; i < (int)(routeVector[routeID].size()); i++){
-            circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
-            line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
-            tmp = wheel;
-        // }
+        circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
+        line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
+        // cout<<"tmp : "<<tmp<<"     wheel :"<<wheel<<endl;
+        tmp = wheel;
     }
     
     imshow("RouadCreator", route);
@@ -59,9 +57,10 @@ void Country::Mouse(int event, int x, int y, int flags){
     if (flagNewRoute == 1) {
 
         if (event == EVENT_LBUTTONDOWN){
-            flagRoadLine = true;
             routeVector[routeID].push_back(Point(x, y));
             tmp = Point(x+1,y+1);
+            wheel = Point(x,y);
+            flagRoadLine = true;
 
         }
         else if (event == EVENT_RBUTTONDOWN){
