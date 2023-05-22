@@ -11,6 +11,7 @@ class Country {
         Mat route; 
         bool flagRoadLine = false;
         bool flagNewRoute = false;
+        bool flagInsideCenter = false;
         Point tmp;
         Point wheel;
         map <int, vector<Point>> routeVector;

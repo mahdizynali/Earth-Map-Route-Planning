@@ -26,7 +26,6 @@ Mat Country::Access() {
 
 //update displaying frame base on refresh time and listen to keyboard commands
 int Country::updateMap() {
-    
     double refreshRate = 20.0 / 1000.0;
     while (true) {
         sleep_for(milliseconds((int)refreshRate * 1000));
@@ -57,7 +56,6 @@ int Country::updateMap() {
 
 // printout vectorialized rout map
 void Country::checkRoutes() {
-
     for(int j=0; j<=routeID; j++){
         cout<<"route ID : "<<j<<endl;
         cout<<"route Points : "<<endl;
@@ -70,9 +68,8 @@ void Country::checkRoutes() {
 
 // draw city centers an routs base on mouse callback
 void Country::drawRoutes() {
-
     countryMap.copyTo(route);
-    if (flagRoadLine) {
+    if (flagRoadLine && flagInsideCenter == false) {
         circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
@@ -82,7 +79,6 @@ void Country::drawRoutes() {
 
 // mouse intraction function that commands to draw routs
 void Country::Mouse(int event, int x, int y, int flags){
-
     if (flagNewRoute == 1) {
         if (event == EVENT_LBUTTONDOWN){
             routeVector[routeID].push_back(Point(x, y));
@@ -93,9 +89,11 @@ void Country::Mouse(int event, int x, int y, int flags){
         else if (event == EVENT_RBUTTONDOWN){
             routeID += 1;
             routeVector[routeID].push_back(Point(x, y));
+            flagInsideCenter = false;
             for(int i=0; i<routeID; i++){
-                double distance = sqrt(pow(routeVector[i][0].x - x, 2) + pow(routeVector[i][0].y, 2));
+                double distance = sqrt(pow(routeVector[i][0].x - x, 2) + pow(routeVector[i][0].y - y, 2));
                 if(distance <= 8){
+                    flagInsideCenter = true;
                     routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
                 }
             }
