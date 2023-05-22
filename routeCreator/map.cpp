@@ -24,6 +24,11 @@ Mat Country::Access() {
     return countryMap;
 }
 
+// return vector of routes
+map <int, vector<Point>> Country::getRouteVector() {
+    return routeVector;
+}
+
 //update displaying frame base on refresh time and listen to keyboard commands
 int Country::updateMap() {
     double refreshRate = 20.0 / 1000.0;

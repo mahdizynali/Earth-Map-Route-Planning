@@ -25,6 +25,7 @@ class Country {
         static void mouseAttacher(int ,int ,int ,int ,void *);
         void Mouse(int ,int ,int ,int);
         void mapGenerator();
+        map <int, vector<Point>> getRouteVector();
 };
 
 #endif // MAP_HPP
