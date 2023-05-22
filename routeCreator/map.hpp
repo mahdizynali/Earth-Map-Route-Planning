@@ -22,8 +22,10 @@ class Country {
         bool flagRoads = false;
         int flagNewRoute = -1;
         Point mousePoint;
-        Point cityCenter;
+        Point tmp;
+        vector <Point> cityCenter;
         vector <Point> wheel;
+        vector <int, vector<Point>> roadID;
 
     public:
         Country(string);
