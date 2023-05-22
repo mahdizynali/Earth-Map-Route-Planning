@@ -87,14 +87,16 @@ void Country::Mouse(int event, int x, int y, int flags){
             flagRoadLine = true;
         }
         else if (event == EVENT_RBUTTONDOWN){
-            routeID += 1;
-            routeVector[routeID].push_back(Point(x, y));
-            flagInsideCenter = false;
-            for(int i=0; i<routeID; i++){
-                double distance = sqrt(pow(routeVector[i][0].x - x, 2) + pow(routeVector[i][0].y - y, 2));
-                if(distance <= 8){
-                    flagInsideCenter = true;
-                    routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
+            if (flagRoadLine == true){
+                routeID += 1;
+                routeVector[routeID].push_back(Point(x, y));
+                flagInsideCenter = false;
+                for(int i=0; i<routeID; i++){
+                    double distance = sqrt(pow(routeVector[i][0].x - x, 2) + pow(routeVector[i][0].y - y, 2));
+                    if(distance <= 8){
+                        flagInsideCenter = true;
+                        routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
+                    }
                 }
             }
         }
