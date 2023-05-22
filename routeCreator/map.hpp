@@ -22,10 +22,9 @@ class Country {
         Mat countryMap;
         Mat route; 
         bool flagRoadLine = false;
-        int flagNewRoute = -1;
+        bool flagNewRoute = false;
         Point tmp;
-        // Point cityCenter;
-        vector <Point> wheel;
+        Point wheel;
         map <int, vector<Point>> routeVector;
 
     public:
