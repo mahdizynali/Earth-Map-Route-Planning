@@ -32,6 +32,7 @@ class Country {
         Mat Access();
         int updateMap();
         void drawRoutes();
+        void checkRoutes();
         static void mouseAttacher(int ,int ,int ,int ,void *);
         void Mouse(int ,int ,int ,int);
 };

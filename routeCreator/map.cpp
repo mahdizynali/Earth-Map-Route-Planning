@@ -35,7 +35,21 @@ int Country::updateMap() {
             case (int('q')):
                 destroyAllWindows();
                 return 0;
+
+            case (int('d')):
+                checkRoutes();
         }
+    }
+}
+
+void Country::checkRoutes() {
+    for(int j=0; j<routeID; j++){
+        cout<<"route ID : "<<j<<endl;
+        cout<<"route Points : "<<endl;
+        for(int i=0; i<(int)(routeVector.size()); i++){
+            cout<<routeVector[j][i]<<endl;
+        }
+        cout<<"================\n";
     }
 }
 
@@ -64,7 +78,6 @@ void Country::Mouse(int event, int x, int y, int flags){
 
         }
         else if (event == EVENT_RBUTTONDOWN){
-            // flagRoadLine = false;
             routeID += 1;
             routeVector[routeID].push_back(Point(x, y));
         }
@@ -73,6 +86,9 @@ void Country::Mouse(int event, int x, int y, int flags){
                 wheel = Point(x,y);
                 routeVector[routeID].push_back(Point(x, y));
             }
+        }
+        else if (event == EVENT_MBUTTONDOWN) {
+            flagRoadLine = false;
         }
         updateMap();
     }
