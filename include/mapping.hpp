@@ -11,7 +11,9 @@ class Country {
         Point wheel;
         Mat countryMap;
         int routeID = 0;
+        Point twoCenter[2];
         bool flagRoadLine = false;
+        bool flagSelectCenter = false;
         int flagMouseCallBack = -1;
         bool flagInsideCenter = false;
         map <int, vector<Point>> routeVector;

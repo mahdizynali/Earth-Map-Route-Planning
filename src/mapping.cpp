@@ -43,6 +43,8 @@ int Country::updateMap() {
 
             case (int('s')):
                 selectCenter();
+                if (flagMouseCallBack == 1)
+                    flagMouseCallBack *= -1;
                 break;
 
             case (int('r')):
@@ -79,8 +81,10 @@ void Country::printVector() {
 int Country::selectCenter() {
     if (routeVector.empty()) {
         cout << "There is no any city center !!\n";
+        flagSelectCenter = false;
         return 0;
     }
+    flagSelectCenter = true;
     return 1;
 }
 
@@ -129,6 +133,21 @@ void Country::Mouse(int event, int x, int y, int flags){
             flagMouseCallBack *= -1;
         }
         updateMap();
+    }
+
+    else if (flagSelectCenter) {
+        if (event == EVENT_LBUTTONDOWN) {
+            for(int j=0; j<=routeID; j++){
+                if (Point(x,y) == routeVector[j][0])
+                    twoCenter[0] = Point(x,y);
+            }
+        }
+        if (event == EVENT_RBUTTONDOWN) {
+            for(int j=0; j<=routeID; j++){
+                if (Point(x,y) == routeVector[j][0])
+                    twoCenter[1] = Point(x,y);
+            }
+        }
     }
 }
 
