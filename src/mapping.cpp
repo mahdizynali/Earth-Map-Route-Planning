@@ -53,14 +53,14 @@ int Country::updateMap() {
                 destroyAllWindows();
                 return 0;
 
-            case (int('c')):
-                checkRoutes();
+            case (int('p')):
+                printVector();
         }
     }
 }
 
 // printout vectorialized rout map
-void Country::checkRoutes() {
+void Country::printVector() {
     for(int j=0; j<=routeID; j++){
         cout<<"route ID : "<<j<<endl;
         cout<<"route Points : "<<endl;
@@ -113,6 +113,7 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         else if (event == EVENT_MBUTTONDOWN) {
             flagRoadLine = false;
+            flagMouseCallBack *= -1;
         }
         updateMap();
     }

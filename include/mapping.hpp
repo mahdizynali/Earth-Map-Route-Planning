@@ -21,7 +21,7 @@ class Country {
         Mat Access();
         int updateMap();
         void drawRoutes();
-        void checkRoutes();
+        void printVector();
         static void mouseAttacher(int ,int ,int ,int ,void *);
         void Mouse(int ,int ,int ,int);
         void mapGenerator();
