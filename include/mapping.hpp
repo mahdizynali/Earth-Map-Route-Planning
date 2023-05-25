@@ -13,8 +13,8 @@ class Country {
         int routeID = 0;
         Point twoCenter[2];
         bool flagRoadLine = false;
-        bool flagSelectCenter = false;
         int flagMouseCallBack = -1;
+        bool flagSelectCenter = false;
         bool flagInsideCenter = false;
         map <int, vector<Point>> routeVector;
 
@@ -26,8 +26,10 @@ class Country {
         void printVector();
         int selectCenter();
         void mapGenerator();
+        Point getTwoCenter();
         void Mouse(int ,int ,int ,int);
         map <int, vector<Point>> getRouteVector();
+        double pointDistance(const Point &, const Point &);
         static void mouseAttacher(int ,int ,int ,int ,void *);
 };
 

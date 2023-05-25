@@ -29,6 +29,16 @@ map <int, vector<Point>> Country::getRouteVector() {
     return routeVector;
 }
 
+// calculate the distatnce of two points
+double Country::pointDistance(const Point & p1, const Point & p2) {
+    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+}
+
+// return two center od selected city
+Point Country::getTwoCenter() {
+    return * twoCenter;
+}
+
 //update displaying frame base on refresh time and listen to keyboard commands
 int Country::updateMap() {
     double refreshRate = 20.0 / 1000.0;
@@ -49,6 +59,8 @@ int Country::updateMap() {
 
             case (int('r')):
                 flagRoadLine = false;
+                flagSelectCenter = false;
+                flagMouseCallBack *= -1;
                 route.release();
                 mapGenerator();
                 routeID = 0;
@@ -114,7 +126,7 @@ void Country::Mouse(int event, int x, int y, int flags){
                 routeVector[routeID].push_back(Point(x, y));
                 flagInsideCenter = false;
                 for(int i=0; i<routeID; i++){
-                    double distance = sqrt(pow(routeVector[i][0].x - x, 2) + pow(routeVector[i][0].y - y, 2));
+                    double distance = pointDistance(routeVector[i][0], Point(x,y));
                     if(distance <= 8){
                         flagInsideCenter = true;
                         routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
@@ -132,23 +144,29 @@ void Country::Mouse(int event, int x, int y, int flags){
             flagRoadLine = false;
             flagMouseCallBack *= -1;
         }
-        updateMap();
     }
 
     else if (flagSelectCenter) {
         if (event == EVENT_LBUTTONDOWN) {
             for(int j=0; j<=routeID; j++){
-                if (Point(x,y) == routeVector[j][0])
-                    twoCenter[0] = Point(x,y);
+                double distance = pointDistance(routeVector[j][0], Point(x,y));
+                if (distance <= 8){
+                    twoCenter[0] = routeVector[j][0];
+                    circle(countryMap, twoCenter[0], 9, Scalar(50, 100, 150), 5);
+                }
             }
         }
         if (event == EVENT_RBUTTONDOWN) {
             for(int j=0; j<=routeID; j++){
-                if (Point(x,y) == routeVector[j][0])
-                    twoCenter[1] = Point(x,y);
+                double distance = pointDistance(routeVector[j][0], Point(x,y));
+                if (distance <= 8){
+                    twoCenter[1] = routeVector[j][0];
+                    circle(countryMap, twoCenter[1], 9, Scalar(0, 0, 255), 5);
+                }
             }
         }
     }
+    updateMap();
 }
 
 // mouse callback attacher function
