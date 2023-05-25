@@ -6,14 +6,14 @@
 class Country {
 
     private:
-        int routeID = 0;
-        Mat countryMap;
         Mat route; 
+        Point tmp;
+        Point wheel;
+        Mat countryMap;
+        int routeID = 0;
         bool flagRoadLine = false;
         int flagMouseCallBack = -1;
         bool flagInsideCenter = false;
-        Point tmp;
-        Point wheel;
         map <int, vector<Point>> routeVector;
 
     public:
@@ -22,10 +22,11 @@ class Country {
         int updateMap();
         void drawRoutes();
         void printVector();
-        static void mouseAttacher(int ,int ,int ,int ,void *);
-        void Mouse(int ,int ,int ,int);
+        int selectCenter();
         void mapGenerator();
+        void Mouse(int ,int ,int ,int);
         map <int, vector<Point>> getRouteVector();
+        static void mouseAttacher(int ,int ,int ,int ,void *);
 };
 
 #endif // MAP_HPP

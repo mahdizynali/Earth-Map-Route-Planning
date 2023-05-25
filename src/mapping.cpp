@@ -41,6 +41,10 @@ int Country::updateMap() {
                 flagMouseCallBack *= -1;
                 break;
 
+            case (int('s')):
+                selectCenter();
+                break;
+
             case (int('r')):
                 flagRoadLine = false;
                 route.release();
@@ -69,6 +73,15 @@ void Country::printVector() {
         }
         cout<<"================\n";
     }
+}
+
+// select two city centers in order to planning
+int Country::selectCenter() {
+    if (routeVector.empty()) {
+        cout << "There is no any city center !!\n";
+        return 0;
+    }
+    return 1;
 }
 
 // draw city centers an routs base on mouse callback
