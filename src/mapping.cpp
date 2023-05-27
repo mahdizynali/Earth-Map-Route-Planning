@@ -1,6 +1,6 @@
 #include "include/mapping.hpp"
 
-string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
+string image_address = "/home/maximum/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
 
 // country class constructor
 Country::Country() {
@@ -52,9 +52,9 @@ int Country::updateMap() {
                 break;
 
             case (int('s')):
-                selectCenter();
                 if (flagMouseCallBack == 1)
                     flagMouseCallBack *= -1;
+                selectCenter();
                 break;
 
             case (int('r')):
@@ -150,9 +150,10 @@ void Country::Mouse(int event, int x, int y, int flags){
         if (event == EVENT_LBUTTONDOWN) {
             for(int j=0; j<=routeID; j++){
                 double distance = pointDistance(routeVector[j][0], Point(x,y));
+                route.release();
                 if (distance <= 8){
                     twoCenter[0] = routeVector[j][0];
-                    circle(countryMap, twoCenter[0], 9, Scalar(50, 100, 150), 5);
+                    circle(countryMap, twoCenter[0], 9, Scalar(50, 100, 150), 3);
                 }
             }
         }
@@ -161,7 +162,7 @@ void Country::Mouse(int event, int x, int y, int flags){
                 double distance = pointDistance(routeVector[j][0], Point(x,y));
                 if (distance <= 8){
                     twoCenter[1] = routeVector[j][0];
-                    circle(countryMap, twoCenter[1], 9, Scalar(0, 0, 255), 5);
+                    circle(countryMap, twoCenter[1], 9, Scalar(0, 0, 255), 3);
                 }
             }
         }

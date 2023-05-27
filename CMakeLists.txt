@@ -7,7 +7,6 @@ project (mazePlanner)
 set( NAME_SRC
     src/main.cpp  
     src/mapping.cpp
-    src/planning.cpp
 )
 
 set( NAME_HEADERS        

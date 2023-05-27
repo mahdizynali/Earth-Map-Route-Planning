@@ -1,8 +1,8 @@
-#include "include/planning.hpp"
+#include "include/mapping.hpp"
 
 int main() {
     
-    Planning p1;
+    Country iran;
     
     return 0;
 }
