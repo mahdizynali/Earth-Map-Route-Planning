@@ -1,6 +1,6 @@
 #include "include/mapping.hpp"
 
-string image_address = "/home/maximum/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
+string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
 
 // country class constructor
 Country::Country() {
@@ -103,35 +103,39 @@ int Country::selectCenter() {
 // draw city centers an routs base on mouse callback
 void Country::drawRoutes() {
     countryMap.copyTo(route);
-    if (flagRoadLine && flagInsideCenter == false) {
+    if (flagRoadLine) {
         circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
     } 
     imshow("RouadCreator", route);
+    
 }
 
 // mouse intraction function that commands to draw routs
 void Country::Mouse(int event, int x, int y, int flags){
     if (flagMouseCallBack == 1) {
-        if (event == EVENT_LBUTTONDOWN){
+        if (event == EVENT_RBUTTONDOWN){
             routeVector[routeID].push_back(Point(x, y));
             tmp = Point(x+1,y+1);
             wheel = Point(x,y);
             flagRoadLine = true;
         }
-        else if (event == EVENT_RBUTTONDOWN){
+        else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
                 routeID += 1;
-                routeVector[routeID].push_back(Point(x, y));
-                flagInsideCenter = false;
-                for(int i=0; i<routeID; i++){
+                for(int i=0; i<=routeID; i++){
+                    cout<<"route : "<<i<<"  vec : "<<routeVector[i][0]<<endl;
                     double distance = pointDistance(routeVector[i][0], Point(x,y));
-                    if(distance <= 8){
-                        flagInsideCenter = true;
-                        routeVector[routeID].push_back(Point(routeVector[i][0].x, routeVector[i][0].y));
+                    if(distance <= 10){
+                        routeVector[routeID].push_back(routeVector[i][0]);
+                        break;
+                    }
+                    else {
+                        routeVector[routeID].push_back(Point(x, y));
                     }
                 }
+                cout<<"=====\n";
             }
         }
         else if (event == EVENT_MOUSEMOVE) {

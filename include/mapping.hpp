@@ -15,7 +15,6 @@ class Country {
         bool flagRoadLine = false;
         int flagMouseCallBack = -1;
         bool flagSelectCenter = false;
-        bool flagInsideCenter = false;
         map <int, vector<Point>> routeVector;
 
     public:
