@@ -5,8 +5,8 @@ string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/map_image/I
 // country class constructor
 Country::Country() {
     mapGenerator();
-    namedWindow("RouadCreator", 1);
-    setMouseCallback("RouadCreator", mouseAttacher, this);
+    namedWindow("Map", 1);
+    setMouseCallback("Map", mouseAttacher, this);
     updateMap();
 }
 
@@ -45,7 +45,6 @@ int Country::updateMap() {
     while (true) {
         sleep_for(milliseconds((int)refreshRate * 1000));
         drawRoutes();      
-        drawCityCenter(); 
         switch (waitKey(1)){
             
             case (int('n')):
@@ -75,6 +74,7 @@ int Country::updateMap() {
             case (int('p')):
                 printVector();
         }
+        imshow("Map", countryMap);
     }
 }
 
@@ -108,17 +108,6 @@ void Country::drawRoutes() {
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
     } 
-    imshow("RouadCreator", countryMap);
-}
-
-// draw selected city centers
-void Country::drawCityCenter() {
-    if (flagRoadLine) {
-        circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
-        line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
-        tmp = wheel;
-    } 
-    imshow("RouadCreator", countryMap);
 }
 
 // mouse intraction function that commands to draw routs
