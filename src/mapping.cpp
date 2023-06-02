@@ -127,15 +127,13 @@ void Country::Mouse(int event, int x, int y, int flags){
                 for(int i=0; i<routeID; i++){
                     double distance = pointDistance(routeVector[i][0], Point(x,y));
                     if((int)distance <= 10){
-                        // cout<<distance<<"  true\n";
-                        routeVector[routeID].push_back(routeVector[i][0]);
+                        routeVector[routeID].push_back(Point(0,0));
+                        routeVector[routeID][0] = routeVector[i][0];
                     }
                     else {
                         routeVector[routeID].push_back(Point(x, y));
                     }
-                    // cout<<"route : "<<i<<"  vec : "<<routeVector[i][0]<<endl;
                 }
-                // cout<<"=====\n";
             }
         }
         else if (event == EVENT_MOUSEMOVE) {
