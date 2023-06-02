@@ -47,10 +47,12 @@ int Country::updateMap() {
         drawRoutes();      
         switch (waitKey(1)){
             
+            // new route lines
             case (int('n')):
                 flagMouseCallBack *= -1;
                 break;
 
+            // select city centers
             case (int('s')):
                 flagRoadLine = false;
                 if (flagMouseCallBack == 1)
@@ -58,6 +60,7 @@ int Country::updateMap() {
                 selectCenter();
                 break;
 
+            // reset map
             case (int('r')):
                 flagRoadLine = false;
                 flagSelectCenter = false;
@@ -67,26 +70,16 @@ int Country::updateMap() {
                 routeVector.clear();
                 break;
 
+            // exit program
             case (int('q')):
                 destroyAllWindows();
                 return 0;
 
+            // planner mode
             case (int('p')):
-                printVector();
+                plr.printVector(routeVector, routeID);
         }
         imshow("Map", countryMap);
-    }
-}
-
-// printout vectorialized rout map
-void Country::printVector() {
-    for(int j=0; j<=routeID; j++){
-        cout<<"route ID : "<<j<<endl;
-        cout<<"route Points : "<<endl;
-        for(int i=0; i<(int)(routeVector[j].size()); i++){
-            cout<<routeVector[j][i]<<endl;
-        }
-        cout<<"================\n";
     }
 }
 

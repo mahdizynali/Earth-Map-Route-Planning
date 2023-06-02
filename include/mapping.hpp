@@ -2,6 +2,7 @@
 #define MAP_HPP
 
 #include "config.hpp"
+#include "planning.hpp"
 
 class Country {
 
@@ -16,14 +17,14 @@ class Country {
         bool flagRoadLine = false;
         bool flagSelectCenter = false;
         map <int, vector<Point>> routeVector;
+        Planner plr;
+        
 
     public:
         Country();
         Mat Access();
         int updateMap();
         void drawRoutes();
-        void drawCityCenter();
-        void printVector();
         int selectCenter();
         void mapGenerator();
         Point getTwoCenter();
