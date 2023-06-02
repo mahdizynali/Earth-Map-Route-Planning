@@ -11,6 +11,7 @@ class Planner {
         void printVector(map <int, vector<Point>>, int);
         double calculate_G(map <int, vector<Point>>, int);
         double calculate_H();
+        double pointDistance(const Point &, const Point &);
 };
 
 #endif //PLANNING_HPP

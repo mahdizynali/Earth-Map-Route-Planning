@@ -29,11 +29,6 @@ map <int, vector<Point>> Country::getRouteVector() {
     return routeVector;
 }
 
-// calculate the distatnce of two points
-double Country::pointDistance(const Point & p1, const Point & p2) {
-    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
-}
-
 // return two center od selected city
 Point Country::getTwoCenter() {
     return * cityCenter;
@@ -120,7 +115,7 @@ void Country::Mouse(int event, int x, int y, int flags){
             if (flagRoadLine == true){
                 routeID += 1;
                 for(int i=0; i<routeID; i++){
-                    double distance = pointDistance(routeVector[i][0], Point(x,y));
+                    double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
                     if((int)distance <= 10){
                         routeVector[routeID].push_back(Point(0,0));
                         routeVector[routeID][0] = routeVector[i][0];
@@ -146,7 +141,7 @@ void Country::Mouse(int event, int x, int y, int flags){
     else if (flagSelectCenter) {
         if (event == EVENT_LBUTTONDOWN) {
             for(int j=0; j<=routeID; j++){
-                double distance = pointDistance(routeVector[j][0], Point(x,y));
+                double distance = plr.pointDistance(routeVector[j][0], Point(x,y));
                 if (distance <= 8){
                     cityCenter[0] = routeVector[j][0];
                     circle(countryMap, cityCenter[0], 9, Scalar(100, 10, 10), 3);
@@ -155,7 +150,7 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         if (event == EVENT_RBUTTONDOWN) {
             for(int j=0; j<=routeID; j++){
-                double distance = pointDistance(routeVector[j][0], Point(x,y));
+                double distance = plr.pointDistance(routeVector[j][0], Point(x,y));
                 if (distance <= 8){
                     cityCenter[1] = routeVector[j][0];
                     circle(countryMap, cityCenter[1], 9, Scalar(0, 0, 255), 3);
