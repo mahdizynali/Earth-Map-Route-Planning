@@ -30,7 +30,6 @@ class Country {
         Point getTwoCenter();
         void Mouse(int ,int ,int ,int);
         map <int, vector<Point>> getRouteVector();
-        double pointDistance(const Point &, const Point &);
         static void mouseAttacher(int ,int ,int ,int ,void *);
 };
 

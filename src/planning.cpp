@@ -23,15 +23,21 @@ void Planner::printVector (map <int, vector<Point>> routeVector, int routeID){
 }
 
 // calculate G for a-star
-double Planner::calculate_G (map <int, vector<Point>> routeVector, int routeID){
-
+void Planner::calculate_G (map <int, vector<Point>> routeVector, int routeID){
+    double sum = 0;
     if (routeVector.empty())
         cout << "vector is empty !!\n";
     
     else {
         for(int i=0; i<=routeID; i++){
-
+            for(int j=0; j<(int)(routeVector[i].size()); j++){
+                if(j + 1 >= (int)(routeVector[i].size()))
+                    break;   
+                sum += pointDistance(routeVector[i][j], routeVector[i][j + 1]);  
+            }    
+        route_G[i] = sum;
+        cout<<"g route "<<i<<" : "<<route_G[i]<<endl;
+        sum = 0;
         }
     } 
-    return 0;
 }
