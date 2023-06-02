@@ -75,9 +75,13 @@ int Country::updateMap() {
                 destroyAllWindows();
                 return 0;
 
-            // planner mode
+            // printout route vector
             case (int('p')):
                 plr.printVector(routeVector, routeID);
+
+            // calculate G for a-star
+            case (int('g')):
+                plr.calculate_G(routeVector, routeID);
         }
         imshow("Map", countryMap);
     }
