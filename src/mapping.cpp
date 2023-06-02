@@ -36,7 +36,7 @@ double Country::pointDistance(const Point & p1, const Point & p2) {
 
 // return two center od selected city
 Point Country::getTwoCenter() {
-    return * twoCenter;
+    return * cityCenter;
 }
 
 //update displaying frame base on refresh time and listen to keyboard commands
@@ -44,7 +44,8 @@ int Country::updateMap() {
     double refreshRate = 20.0 / 1000.0;
     while (true) {
         sleep_for(milliseconds((int)refreshRate * 1000));
-        drawRoutes();       
+        drawRoutes();      
+        drawCityCenter(); 
         switch (waitKey(1)){
             
             case (int('n')):
@@ -52,6 +53,7 @@ int Country::updateMap() {
                 break;
 
             case (int('s')):
+                flagRoadLine = false;
                 if (flagMouseCallBack == 1)
                     flagMouseCallBack *= -1;
                 selectCenter();
@@ -61,7 +63,6 @@ int Country::updateMap() {
                 flagRoadLine = false;
                 flagSelectCenter = false;
                 flagMouseCallBack *= -1;
-                route.release();
                 mapGenerator();
                 routeID = 0;
                 routeVector.clear();
@@ -100,16 +101,24 @@ int Country::selectCenter() {
     return 1;
 }
 
-// draw city centers an routs base on mouse callback
+// draw routs base on mouse callback
 void Country::drawRoutes() {
-    countryMap.copyTo(route);
     if (flagRoadLine) {
         circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
     } 
-    imshow("RouadCreator", route);
-    
+    imshow("RouadCreator", countryMap);
+}
+
+// draw selected city centers
+void Country::drawCityCenter() {
+    if (flagRoadLine) {
+        circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
+        line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
+        tmp = wheel;
+    } 
+    imshow("RouadCreator", countryMap);
 }
 
 // mouse intraction function that commands to draw routs
@@ -152,10 +161,9 @@ void Country::Mouse(int event, int x, int y, int flags){
         if (event == EVENT_LBUTTONDOWN) {
             for(int j=0; j<=routeID; j++){
                 double distance = pointDistance(routeVector[j][0], Point(x,y));
-                route.release();
                 if (distance <= 8){
-                    twoCenter[0] = routeVector[j][0];
-                    circle(countryMap, twoCenter[0], 9, Scalar(50, 100, 150), 3);
+                    cityCenter[0] = routeVector[j][0];
+                    circle(countryMap, cityCenter[0], 9, Scalar(100, 10, 10), 3);
                 }
             }
         }
@@ -163,8 +171,8 @@ void Country::Mouse(int event, int x, int y, int flags){
             for(int j=0; j<=routeID; j++){
                 double distance = pointDistance(routeVector[j][0], Point(x,y));
                 if (distance <= 8){
-                    twoCenter[1] = routeVector[j][0];
-                    circle(countryMap, twoCenter[1], 9, Scalar(0, 0, 255), 3);
+                    cityCenter[1] = routeVector[j][0];
+                    circle(countryMap, cityCenter[1], 9, Scalar(0, 0, 255), 3);
                 }
             }
         }

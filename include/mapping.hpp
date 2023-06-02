@@ -6,14 +6,14 @@
 class Country {
 
     private:
-        Mat route; 
+        Mat Center; 
+        Mat countryMap;
         Point tmp;
         Point wheel;
-        Mat countryMap;
+        Point cityCenter[2];
         int routeID = 0;
-        Point twoCenter[2];
-        bool flagRoadLine = false;
         int flagMouseCallBack = -1;
+        bool flagRoadLine = false;
         bool flagSelectCenter = false;
         map <int, vector<Point>> routeVector;
 
@@ -22,6 +22,7 @@ class Country {
         Mat Access();
         int updateMap();
         void drawRoutes();
+        void drawCityCenter();
         void printVector();
         int selectCenter();
         void mapGenerator();
