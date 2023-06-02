@@ -124,18 +124,18 @@ void Country::Mouse(int event, int x, int y, int flags){
         else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
                 routeID += 1;
-                for(int i=0; i<=routeID; i++){
-                    cout<<"route : "<<i<<"  vec : "<<routeVector[i][0]<<endl;
+                for(int i=0; i<routeID; i++){
                     double distance = pointDistance(routeVector[i][0], Point(x,y));
-                    if(distance <= 10){
+                    if((int)distance <= 10){
+                        // cout<<distance<<"  true\n";
                         routeVector[routeID].push_back(routeVector[i][0]);
-                        break;
                     }
                     else {
                         routeVector[routeID].push_back(Point(x, y));
                     }
+                    // cout<<"route : "<<i<<"  vec : "<<routeVector[i][0]<<endl;
                 }
-                cout<<"=====\n";
+                // cout<<"=====\n";
             }
         }
         else if (event == EVENT_MOUSEMOVE) {
