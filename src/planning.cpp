@@ -5,6 +5,15 @@ double Planner::pointDistance(const Point & p1, const Point & p2) {
     return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 
+// // initializing Connection Routes vector
+// void Planner::initializingConnectionRoutes() {
+
+//         for(int i=0; i<(int)(routeVector[routeID].size()); i++){
+//             connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
+//         } 
+
+// }
+
 // printout vectorialized rout map
 void Planner::printVector (map <pair<int, int>, vector<Point>> connectionRoutes, int routeID){
     if (connectionRoutes.empty())

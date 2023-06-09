@@ -108,15 +108,6 @@ void Country::drawRoutes() {
     } 
 }
 
-// initializing Connection Routes vector
-void Country::initializingConnectionRoutes() {
-
-        for(int i=0; i<(int)(routeVector[routeID].size()); i++){
-            connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
-        } 
-
-}
-
 // mouse intraction function that commands to draw routs
 void Country::Mouse(int event, int x, int y, int flags){
     
@@ -129,12 +120,11 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
-                // initializingConnectionRoutes();
+                initializingConnectionRoutes();
                 routeID += 1;
                 number += 1;
                 for(int i=0; i<=routeID; i++){
                     double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
-                    // cout<<"i : "<<i<<"  dis : "<<distance<<endl;
                     if((int)distance <= 12){
                         routeVector[routeID].push_back(Point(0,0));
                         routeVector[routeID][0] = routeVector[i][0];

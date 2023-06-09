@@ -7,6 +7,7 @@ class Planner {
 
     private:
         map <int, double> route_distance;
+        map <pair<int, int>, vector<Point>> connectionRoutes;
 
     public :
         void printVector(map <pair<int, int>, vector<Point>>, int);
