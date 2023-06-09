@@ -100,7 +100,7 @@ void Country::drawRoutes() {
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
 
-        Point center = routeVector[routeID][0];
+        Point center = Point(routeVector[routeID][0].x - 5, routeVector[routeID][0].y - 13);
         string rId = to_string(routeID);
         putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
     } 
