@@ -14,6 +14,7 @@ class Planner {
         void calculateDistance(map <int, vector<Point>>, int);
         double calculate_H();
         double pointDistance(const Point &, const Point &);
+        void initializingConnectionRoutes(map <int, vector<Point>>, int);
 };
 
 #endif //PLANNING_HPP

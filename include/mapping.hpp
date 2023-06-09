@@ -17,7 +17,6 @@ class Country {
         int routeID = 0;
         int flagMouseCallBack = -1;
         bool flagRoadLine = false;
-        bool flagCenterNumber = true;
         bool flagSelectCenter = false;
         map <int, vector<Point>> routeVector;
         Planner plr;

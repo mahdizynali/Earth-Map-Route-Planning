@@ -6,7 +6,7 @@ double Planner::pointDistance(const Point & p1, const Point & p2) {
 }
 
 // // initializing Connection Routes vector
-// void Planner::initializingConnectionRoutes() {
+// void Planner::initializingConnectionRoutes(map <int, vector<Point>> routeVector, int routeID) {
 
 //         for(int i=0; i<(int)(routeVector[routeID].size()); i++){
 //             connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);

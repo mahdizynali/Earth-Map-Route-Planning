@@ -100,11 +100,10 @@ void Country::drawRoutes() {
         circle(countryMap, routeVector[routeID][0], 10, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
-        // if (flagCenterNumber){
-            Point center = Point(routeVector[routeID][0].x - 5, routeVector[routeID][0].y - 13);
-            string rId = to_string(number);
-            putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
-        // }
+
+        Point center = Point(routeVector[routeID][0].x - 5, routeVector[routeID][0].y - 13);
+        string rId = to_string(number);
+        putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
     } 
 }
 
