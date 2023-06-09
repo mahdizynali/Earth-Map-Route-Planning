@@ -11,17 +11,10 @@ void Planner::printVector (map <pair<int, int>, vector<Point>> connectionRoutes,
         cout << "vector is empty !!\n";
     
     else {
-    // for(int j=0; j<=routeID; j++){
-    //     cout<<"route ID : "<<j<<endl;
-    //     cout<<"route Points : "<<endl;
-    //     for(int i=0; i<(int)(routeVector[j].size()); i++){
-    //         cout<<routeVector[j][i]<<endl;
-    //     }
-    //     cout<<"================\n";
-    // }
+
         for (const auto& entry : connectionRoutes) {
-            std::cout << "Key: (" << entry.first.first << ", " << entry.first.second << ")\n";
-            std::cout << "Values:\n";
+            std::cout << "Routes ID : (" << entry.first.first << " to " << entry.first.second << ")\n";
+            std::cout << "Vector Values:\n";
             for (const auto& point : entry.second) {
                 std::cout << "(" << point.x << ", " << point.y << ")\n";
             }

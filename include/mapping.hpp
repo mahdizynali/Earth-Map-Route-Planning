@@ -12,6 +12,7 @@ class Country {
         Point tmp;
         Point wheel;
         Point cityCenter[2];
+        int tmpID = 1;
         int routeID = 0;
         int flagMouseCallBack = -1;
         bool flagRoadLine = false;
@@ -28,6 +29,7 @@ class Country {
         void drawRoutes();
         int selectCenter();
         void mapGenerator();
+        void initializingConnectionRoutes();
         Point getTwoCenter();
         void Mouse(int ,int ,int ,int);
         map <int, vector<Point>> getRouteVector();

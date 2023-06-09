@@ -106,28 +106,40 @@ void Country::drawRoutes() {
     } 
 }
 
+// initializing Connection Routes vector
+void Country::initializingConnectionRoutes() {
+    
+    for(int i=0; i<(int)(routeVector[routeID].size()); i++){
+        connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
+    }  
+}
+
 // mouse intraction function that commands to draw routs
 void Country::Mouse(int event, int x, int y, int flags){
+    
     if (flagMouseCallBack == 1) {
         if (event == EVENT_RBUTTONDOWN){
             routeVector[routeID].push_back(Point(x, y));
-            connectionRoutes[make_pair(routeID,routeID)].push_back(Point(x, y));
             tmp = Point(x+1,y+1);
             wheel = Point(x,y);
             flagRoadLine = true;
         }
         else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
+                initializingConnectionRoutes();
                 routeID += 1;
                 for(int i=0; i<=routeID; i++){
                     double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
                     if((int)distance <= 12){
                         routeVector[routeID].push_back(Point(0,0));
                         routeVector[routeID][0] = routeVector[i][0];
+                        tmpID = i;
+                        break;
                     }
                     else {
                         routeVector[routeID].push_back(Point(x, y));
-                        connectionRoutes[make_pair(routeID,routeID + 1)].push_back(wheel);
+                        tmpID = routeID + 1;
+                        break;
                     }
                 }
             }
@@ -136,7 +148,6 @@ void Country::Mouse(int event, int x, int y, int flags){
             if (flagRoadLine == true){
                 wheel = Point(x,y);
                 routeVector[routeID].push_back(wheel);
-                connectionRoutes[make_pair(routeID,routeID + 1)].push_back(wheel);
             }
         }
         else if (event == EVENT_MBUTTONDOWN) {
