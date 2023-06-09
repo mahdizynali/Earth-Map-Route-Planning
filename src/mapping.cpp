@@ -72,11 +72,11 @@ int Country::updateMap() {
 
             // printout route vector
             case (int('p')):
-                plr.printVector(routeVector, routeID);
+                plr.printVector(connectionRoutes, routeID);
 
             // calculate G for a-star
             case (int('g')):
-                plr.calculate_G(routeVector, routeID);
+                plr.calculateDistance(routeVector, routeID);
         }
         imshow("Map", countryMap);
     }
@@ -96,9 +96,13 @@ int Country::selectCenter() {
 // draw routs base on mouse callback
 void Country::drawRoutes() {
     if (flagRoadLine) {
-        circle(countryMap, routeVector[routeID][0], 8, Scalar(0, 255, 0), FILLED);
+        circle(countryMap, routeVector[routeID][0], 10, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
+
+        Point center = routeVector[routeID][0];
+        string rId = to_string(routeID);
+        putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
     } 
 }
 
@@ -107,6 +111,7 @@ void Country::Mouse(int event, int x, int y, int flags){
     if (flagMouseCallBack == 1) {
         if (event == EVENT_RBUTTONDOWN){
             routeVector[routeID].push_back(Point(x, y));
+            connectionRoutes[make_pair(routeID,routeID)].push_back(Point(x, y));
             tmp = Point(x+1,y+1);
             wheel = Point(x,y);
             flagRoadLine = true;
@@ -114,14 +119,15 @@ void Country::Mouse(int event, int x, int y, int flags){
         else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
                 routeID += 1;
-                for(int i=0; i<routeID; i++){
+                for(int i=0; i<=routeID; i++){
                     double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
-                    if((int)distance <= 10){
+                    if((int)distance <= 12){
                         routeVector[routeID].push_back(Point(0,0));
                         routeVector[routeID][0] = routeVector[i][0];
                     }
                     else {
                         routeVector[routeID].push_back(Point(x, y));
+                        connectionRoutes[make_pair(routeID,routeID + 1)].push_back(wheel);
                     }
                 }
             }
@@ -130,6 +136,7 @@ void Country::Mouse(int event, int x, int y, int flags){
             if (flagRoadLine == true){
                 wheel = Point(x,y);
                 routeVector[routeID].push_back(wheel);
+                connectionRoutes[make_pair(routeID,routeID + 1)].push_back(wheel);
             }
         }
         else if (event == EVENT_MBUTTONDOWN) {
@@ -144,7 +151,7 @@ void Country::Mouse(int event, int x, int y, int flags){
                 double distance = plr.pointDistance(routeVector[j][0], Point(x,y));
                 if (distance <= 8){
                     cityCenter[0] = routeVector[j][0];
-                    circle(countryMap, cityCenter[0], 9, Scalar(100, 10, 10), 3);
+                    circle(countryMap, cityCenter[0], 11, Scalar(130, 63, 185), 2);
                 }
             }
         }
@@ -153,7 +160,7 @@ void Country::Mouse(int event, int x, int y, int flags){
                 double distance = plr.pointDistance(routeVector[j][0], Point(x,y));
                 if (distance <= 8){
                     cityCenter[1] = routeVector[j][0];
-                    circle(countryMap, cityCenter[1], 9, Scalar(0, 0, 255), 3);
+                    circle(countryMap, cityCenter[1], 11, Scalar(0, 0, 0), 2);
                 }
             }
         }

@@ -6,24 +6,32 @@ double Planner::pointDistance(const Point & p1, const Point & p2) {
 }
 
 // printout vectorialized rout map
-void Planner::printVector (map <int, vector<Point>> routeVector, int routeID){
-    if (routeVector.empty())
+void Planner::printVector (map <pair<int, int>, vector<Point>> connectionRoutes, int routeID){
+    if (connectionRoutes.empty())
         cout << "vector is empty !!\n";
     
     else {
-    for(int j=0; j<=routeID; j++){
-        cout<<"route ID : "<<j<<endl;
-        cout<<"route Points : "<<endl;
-        for(int i=0; i<(int)(routeVector[j].size()); i++){
-            cout<<routeVector[j][i]<<endl;
+    // for(int j=0; j<=routeID; j++){
+    //     cout<<"route ID : "<<j<<endl;
+    //     cout<<"route Points : "<<endl;
+    //     for(int i=0; i<(int)(routeVector[j].size()); i++){
+    //         cout<<routeVector[j][i]<<endl;
+    //     }
+    //     cout<<"================\n";
+    // }
+        for (const auto& entry : connectionRoutes) {
+            std::cout << "Key: (" << entry.first.first << ", " << entry.first.second << ")\n";
+            std::cout << "Values:\n";
+            for (const auto& point : entry.second) {
+                std::cout << "(" << point.x << ", " << point.y << ")\n";
+            }
+            std::cout << "\n";
         }
-        cout<<"================\n";
-    }
     }
 }
 
 // calculate G for a-star
-void Planner::calculate_G (map <int, vector<Point>> routeVector, int routeID){
+void Planner::calculateDistance (map <int, vector<Point>> routeVector, int routeID){
     double sum = 0;
     if (routeVector.empty())
         cout << "vector is empty !!\n";
@@ -35,8 +43,8 @@ void Planner::calculate_G (map <int, vector<Point>> routeVector, int routeID){
                     break;   
                 sum += pointDistance(routeVector[i][j], routeVector[i][j + 1]);  
             }    
-        route_G[i] = sum;
-        cout<<"g route "<<i<<" : "<<route_G[i]<<endl;
+        route_distance[i] = sum;
+        cout<<"distance route "<<i<<" to "<<i+1<<" : "<<route_distance[i]<<endl;
         sum = 0;
         }
     } 

@@ -17,6 +17,7 @@ class Country {
         bool flagRoadLine = false;
         bool flagSelectCenter = false;
         map <int, vector<Point>> routeVector;
+        map <pair<int, int>, vector<Point>> connectionRoutes;
         Planner plr;
         
 

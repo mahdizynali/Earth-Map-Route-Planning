@@ -6,11 +6,11 @@
 class Planner {
 
     private:
-        map <int, double> route_G;
+        map <int, double> route_distance;
 
     public :
-        void printVector(map <int, vector<Point>>, int);
-        void calculate_G(map <int, vector<Point>>, int);
+        void printVector(map <pair<int, int>, vector<Point>>, int);
+        void calculateDistance(map <int, vector<Point>>, int);
         double calculate_H();
         double pointDistance(const Point &, const Point &);
 };
