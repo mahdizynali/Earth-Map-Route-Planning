@@ -23,7 +23,6 @@ void Planner::printVector (map <pair<int, int>, vector<Point>> connectionRoutes,
     }
 }
 
-// calculate G for a-star
 void Planner::calculateDistance (map <int, vector<Point>> routeVector, int routeID){
     double sum = 0;
     if (routeVector.empty())

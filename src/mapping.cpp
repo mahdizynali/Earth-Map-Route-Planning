@@ -75,8 +75,8 @@ int Country::updateMap() {
                 plr.printVector(connectionRoutes, routeID);
 
             // calculate G for a-star
-            case (int('g')):
-                plr.calculateDistance(routeVector, routeID);
+            // case (int('g')):
+                // plr.calculateDistance(routeVector, routeID);
         }
         imshow("Map", countryMap);
     }
@@ -95,23 +95,26 @@ int Country::selectCenter() {
 
 // draw routs base on mouse callback
 void Country::drawRoutes() {
+    
     if (flagRoadLine) {
         circle(countryMap, routeVector[routeID][0], 10, Scalar(0, 255, 0), FILLED);
         line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
         tmp = wheel;
-
-        Point center = Point(routeVector[routeID][0].x - 5, routeVector[routeID][0].y - 13);
-        string rId = to_string(routeID);
-        putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
+        if (flagCenterNumber == false){
+            Point center = Point(routeVector[routeID][0].x - 5, routeVector[routeID][0].y - 13);
+            string rId = to_string(number);
+            putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
+        }
     } 
 }
 
 // initializing Connection Routes vector
 void Country::initializingConnectionRoutes() {
-    
-    for(int i=0; i<(int)(routeVector[routeID].size()); i++){
-        connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
-    }  
+
+        for(int i=0; i<(int)(routeVector[routeID].size()); i++){
+            connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
+        } 
+
 }
 
 // mouse intraction function that commands to draw routs
@@ -126,19 +129,22 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
-                initializingConnectionRoutes();
+                // initializingConnectionRoutes();
                 routeID += 1;
                 for(int i=0; i<=routeID; i++){
                     double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
                     if((int)distance <= 12){
                         routeVector[routeID].push_back(Point(0,0));
                         routeVector[routeID][0] = routeVector[i][0];
+                        flagCenterNumber = true;
                         tmpID = i;
                         break;
                     }
                     else {
                         routeVector[routeID].push_back(Point(x, y));
                         tmpID = routeID + 1;
+                        flagCenterNumber = false;
+                        number ++;
                         break;
                     }
                 }
