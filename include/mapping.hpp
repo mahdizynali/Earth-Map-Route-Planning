@@ -29,7 +29,6 @@ class Country {
         void drawRoutes();
         int selectCenter();
         void mapGenerator();
-        void initializingConnectionRoutes();
         Point getTwoCenter();
         void Mouse(int ,int ,int ,int);
         map <int, vector<Point>> getRouteVector();

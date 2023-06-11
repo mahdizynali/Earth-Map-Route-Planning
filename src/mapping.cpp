@@ -1,6 +1,6 @@
 #include "include/mapping.hpp"
 
-string image_address = "/home/mahdi/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
+string image_address = "/home/maximum/Desktop/Earth-Map-Route-Planning/map_image/Iran.png";
 
 // country class constructor
 Country::Country() {
@@ -71,8 +71,8 @@ int Country::updateMap() {
                 return 0;
 
             // printout route vector
-            case (int('p')):
-                plr.printVector(connectionRoutes, routeID);
+            // case (int('p')):
+            //     plr.printVector(connectionRoutes, routeID);
 
             // calculate G for a-star
             // case (int('g')):
@@ -119,7 +119,6 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         else if (event == EVENT_LBUTTONDOWN){
             if (flagRoadLine == true){
-                initializingConnectionRoutes();
                 routeID += 1;
                 number += 1;
                 for(int i=0; i<=routeID; i++){
