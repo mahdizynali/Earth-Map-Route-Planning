@@ -5,14 +5,64 @@ double Planner::pointDistance(const Point & p1, const Point & p2) {
     return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 
-// // initializing Connection Routes vector
-// void Planner::initializingConnectionRoutes(map <int, vector<Point>> routeVector, int routeID) {
+// initializing Connection Routes vector
+void Planner::initializingConnectionRoutes(map <int, vector<Point>> routeVector, int routeID) {
 
-//         for(int i=0; i<(int)(routeVector[routeID].size()); i++){
-//             connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
-//         } 
+    // for(int i=0; i<=routeID; i++) {
+    //     cout<<"id : "<<i<<endl;
+    //     for(int j=0; j<(int)(routeVector[routeID].size()); j++){
+    //         cout<<routeVector[i][j]<<endl;
+    //         // connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
+    //     } 
+    //     cout<<"==========\n";
+    // }
 
-// }
+    // map<int, vector<Point>> routeVector;
+
+    // // Populate the map with some sample data
+    // routeVector[1] = {{1, 1}, {2, 2}, {3, 3}};
+    // routeVector[2] = {{4, 4}, {5, 5}};
+    // routeVector[3] = {{5, 5}};
+
+    // Find connections between IDs
+    map<int, vector<int>> connections;
+
+    for (const auto& entry : routeVector) {
+        int id = entry.first;
+        const vector<Point>& points = entry.second;
+
+        // Iterate over other IDs
+        for (const auto& otherEntry : routeVector) {
+            int otherId = otherEntry.first;
+            const vector<Point>& otherPoints = otherEntry.second;
+
+            // Skip if the same ID
+            if (id == otherId)
+                continue;
+
+            // Check if there is a connection
+            for (const auto& point : points) {
+                if (find(otherPoints.begin(), otherPoints.end(), point) != otherPoints.end()) {
+                    // Connection found
+                    connections[id].push_back(otherId);
+                    break;
+                }
+            }
+        }
+    }
+    
+    // Print the connections
+    for (const auto& entry : connections) {
+        int id = entry.first;
+        const vector<int>& connectedIds = entry.second;
+
+        cout << "ID " << id << " is connected to: ";
+        for (int connectedId : connectedIds) {
+            cout << connectedId << " ";
+        }
+        cout << endl;
+    }
+}
 
 // printout vectorialized rout map
 void Planner::printVector (map <pair<int, int>, vector<Point>> connectionRoutes, int routeID){

@@ -71,8 +71,8 @@ int Country::updateMap() {
                 return 0;
 
             // printout route vector
-            // case (int('p')):
-            //     plr.printVector(connectionRoutes, routeID);
+            case (int('p')):
+                plr.initializingConnectionRoutes(routeVector, routeID);
 
             // calculate G for a-star
             // case (int('g')):
@@ -111,16 +111,17 @@ void Country::drawRoutes() {
 void Country::Mouse(int event, int x, int y, int flags){
     
     if (flagMouseCallBack == 1) {
-        if (event == EVENT_RBUTTONDOWN){
-            routeVector[routeID].push_back(Point(x, y));
-            tmp = Point(x+1,y+1);
-            wheel = Point(x,y);
-            flagRoadLine = true;
-        }
-        else if (event == EVENT_LBUTTONDOWN){
-            if (flagRoadLine == true){
+        if (event == EVENT_LBUTTONDOWN){
+            if(routeID == -1){
                 routeID += 1;
+                routeVector[routeID].push_back(Point(x, y));
+                tmp = Point(x+1,y+1);
+                wheel = Point(x,y);
+                flagRoadLine = true;
+            }
+            else if (flagRoadLine == true) {
                 number += 1;
+                routeID += 1;
                 for(int i=0; i<=routeID; i++){
                     double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
                     if((int)distance <= 12){
@@ -130,10 +131,10 @@ void Country::Mouse(int event, int x, int y, int flags){
                         break;
                     }
                     else {
-                        routeVector[routeID].push_back(Point(x, y));
-                        tmpID = routeID + 1;
+                        routeVector[routeID].push_back(Point(x, y)); 
                     }
-                }
+            
+                }                  
             }
         }
         else if (event == EVENT_MOUSEMOVE) {

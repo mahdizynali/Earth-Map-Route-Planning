@@ -12,9 +12,8 @@ class Country {
         Point tmp;
         Point wheel;
         Point cityCenter[2];
-        int tmpID = 1;
         int number = 0;
-        int routeID = 0;
+        int routeID = -1;
         int flagMouseCallBack = -1;
         bool flagRoadLine = false;
         bool flagSelectCenter = false;
