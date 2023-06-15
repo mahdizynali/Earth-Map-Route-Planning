@@ -125,8 +125,8 @@ void Country::Mouse(int event, int x, int y, int flags){
                 for(int i=0; i<=routeID; i++){
                     double distance = plr.pointDistance(routeVector[i][0], Point(x,y));
                     if((int)distance <= 12){
-                        routeVector[routeID].push_back(Point(0,0));
-                        routeVector[routeID][0] = routeVector[i][0];
+                        routeVector[routeID].clear();
+                        routeVector[routeID].push_back(routeVector[i][0]);
                         number = i;
                         break;
                     }
