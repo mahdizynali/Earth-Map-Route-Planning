@@ -145,6 +145,8 @@ void Country::Mouse(int event, int x, int y, int flags){
         }
         else if (event == EVENT_MBUTTONDOWN) {
             flagRoadLine = false;
+            routeVector[routeID].clear();
+            routeID -= 1;
             flagMouseCallBack *= -1;
         }
     }
