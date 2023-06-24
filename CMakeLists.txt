@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-project (mazePlanner)
+project (maze)
 
 set( NAME_SRC
     src/main.cpp  
@@ -24,6 +24,6 @@ include_directories(
 )
 
 
-add_executable(mazePlanner ${NAME_SRC} ${NAME_HEADERS})
+add_executable(maze ${NAME_SRC} ${NAME_HEADERS})
 
-target_link_libraries(mazePlanner PRIVATE ${OpenCV_LIBS})
+target_link_libraries(maze PRIVATE ${OpenCV_LIBS})
