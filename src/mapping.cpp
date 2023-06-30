@@ -61,8 +61,10 @@ int Country::updateMap() {
                 flagSelectCenter = false;
                 // flagMouseCallBack = false;
                 mapGenerator();
-                routeID = 0;
+                routeID = -1;
+                nodeNumber = -1;
                 routeVector.clear();
+                node.clear();
                 break;
 
             // exit program
@@ -98,8 +100,8 @@ void Country::drawRoutes() {
     
     if (flagRoadLine) {
         circle(countryMap, node[nodeNumber][0], 10, Scalar(0, 255, 0), FILLED);
-        // line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
-        // tmp = wheel;
+        line(countryMap, tmp, wheel, Scalar(255, 0, 0),3, LINE_8);
+        tmp = wheel;
 
         Point center = Point(node[nodeNumber][0].x - 5, node[nodeNumber][0].y - 13);
         string rId = to_string(nodeNumber);
@@ -113,46 +115,42 @@ void Country::Mouse(int event, int x, int y, int flags){
     if (flagMouseCallBack == 1) {
         if (event == EVENT_LBUTTONDOWN){
             nodeNumber ++;
+            routeID += 1;
             node[nodeNumber].push_back(Point(x, y));
             flagRoadLine = true;
-            // if(routeID == -1){
-            //     routeID += 1;
-            //     routeVector[routeID].push_back(Point(x, y));
-            //     tmp = Point(x+1,y+1);
-            //     wheel = Point(x,y);
-            //     flagRoadLine = true;
-            // }
-            // else if (flagRoadLine == true) {
-            //     nodeNumber += 1;
-            //     routeID += 1;
-                
-            //     for(int i=0; i<=nodeNumber; i++){
-            //         double distance = plr.pointDistance(node[i][0], Point(x,y));
-            //         if((int)distance <= 12){
-            //             routeVector[routeID].clear();
-            //             routeVector[routeID].push_back(routeVector[i][0]);
-            //             nodeNumber = i;
-            //             break;
-            //         }
-            //         else {
-            //             routeVector[routeID].push_back(Point(x, y)); 
-            //         }
+            if(routeID == 0){
+                // routeVector[routeID].push_back(Point(x, y));
+                tmp = Point(x+1,y+1);
+                wheel = Point(x,y);
+            }
+            else if (routeID > 0) {
+                for(int i=0; i<=nodeNumber; i++){
+                    double distance = plr.pointDistance(node[i][0], Point(x,y));
+                    if((int)distance <= 12){
+                        routeVector[routeID].clear();
+                        routeVector[routeID].push_back(routeVector[i][0]);
+                        nodeNumber = i;
+                        break;
+                    }
+                    else {
+                        routeVector[routeID].push_back(Point(x, y)); 
+                    }
             
-            //     }                  
-            // }
+                }                  
+            }
         }
-        // else if (event == EVENT_MOUSEMOVE) {
-        //     if (flagRoadLine == true){
-        //         wheel = Point(x,y);
-        //         routeVector[routeID].push_back(wheel);
-        //     }
-        // }
-        // else if (event == EVENT_MBUTTONDOWN) {
-        //     flagRoadLine = false;
-        //     routeVector[routeID].clear();
-        //     routeID -= 1;
-        //     flagMouseCallBack = false;
-        // }
+        else if (event == EVENT_MOUSEMOVE) {
+            if (flagRoadLine == true){
+                wheel = Point(x,y);
+                routeVector[routeID].push_back(wheel);
+            }
+        }
+        else if (event == EVENT_MBUTTONDOWN) {
+            flagRoadLine = false;
+            routeVector[routeID].clear();
+            routeID -= 1;
+            flagMouseCallBack = false;
+        }
     }
 
     else if (flagSelectCenter) {
