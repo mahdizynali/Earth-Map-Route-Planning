@@ -12,11 +12,13 @@ class Country {
         Point tmp;
         Point wheel;
         Point cityCenter[2];
-        int number = 0;
         int routeID = -1;
-        int flagMouseCallBack = -1;
+        int nodeNumber = -1;
+        int printNumber = -1;
+        bool flagMouseCallBack = false;
         bool flagRoadLine = false;
         bool flagSelectCenter = false;
+        map <int, vector<Point>> node;
         map <int, vector<Point>> routeVector;
         Planner plr;
         
