@@ -122,19 +122,20 @@ void Country::Mouse(int event, int x, int y, int flags){
                 tmp = Point(x+1,y+1);
                 wheel = Point(x,y);
             }
-        }
-        else if (event == EVENT_MOUSEMOVE) {
             if (flagRoadLine == true) {
                 for(int i=0; i<=nodeNumber; i++){
                     double distance = plr.pointDistance(node[i][0], Point(x,y));
                     if((int)distance != 0 && (int)distance <= 12){
-                        routeVector[routeID].clear();
-                        routeVector[routeID].push_back(node[i][0]);
-                        // nodeNumber = i;
+                        node[nodeNumber][0] = node[i][0];
+                        nodeNumber --;
                         break;
                     }
 
                 }                  
+            }
+        }
+        else if (event == EVENT_MOUSEMOVE) {
+            if (flagRoadLine == true) {
                 wheel = Point(x,y);
                 routeVector[routeID].push_back(wheel);
             }
