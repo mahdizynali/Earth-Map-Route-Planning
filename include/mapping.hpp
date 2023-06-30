@@ -14,6 +14,7 @@ class Country {
         Point cityCenter[2];
         int routeID = -1;
         int nodeNumber = -1;
+        int printNumber = -1;
         bool flagMouseCallBack = false;
         bool flagRoadLine = false;
         bool flagSelectCenter = false;

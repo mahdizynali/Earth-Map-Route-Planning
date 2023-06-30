@@ -104,7 +104,7 @@ void Country::drawRoutes() {
         tmp = wheel;
 
         Point center = Point(node[nodeNumber][0].x - 5, node[nodeNumber][0].y - 13);
-        string rId = to_string(nodeNumber);
+        string rId = to_string(printNumber);
         putText(countryMap, rId, center, FONT_HERSHEY_SIMPLEX, 0.6, Scalar(0, 0, 255), 2);
     } 
 }
@@ -129,10 +129,13 @@ void Country::Mouse(int event, int x, int y, int flags){
                         node[nodeNumber][0] = node[i][0];
                         routeVector[routeID].clear();
                         routeVector[routeID].push_back(node[i][0]);
-                        nodeNumber --;
+                        // nodeNumber --;
+                        printNumber = i;
                         break;
                     }
-
+                    else {
+                        printNumber = nodeNumber;
+                    }
                 }                  
             }
         }
