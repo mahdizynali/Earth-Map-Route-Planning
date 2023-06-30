@@ -14,16 +14,16 @@ void Planner::initializingConnectionRoutes(map <int, vector<Point>> routeVector,
             cout<<routeVector[i][j]<<endl;
             // connectionRoutes[make_pair(routeID, tmpID)].push_back(routeVector[routeID][i]);
         } 
-        cout<<"==========\n\n";
+        cout<<"\n===================\n\n";
     }
 
-    for(int i=0; i<=routeID; i++) {
-        for(int j=0; j<=routeID; j++) {
-            if (routeVector[i][0] == routeVector[j].back()) {
-                cout<<i<<"   "<<j<<"\n\n";
-            }
-        }
-    }
+    // for(int i=0; i<=routeID; i++) {
+    //     for(int j=0; j<=routeID; j++) {
+    //         if (routeVector[i][0] == routeVector[j].back()) {
+    //             cout<<i<<"   "<<j<<"\n\n";
+    //         }
+    //     }
+    // }
     // // Find connections between IDs
     // map<int, vector<int>> connections;
 

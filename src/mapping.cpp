@@ -1,6 +1,6 @@
 #include "include/mapping.hpp"
 
-string image_address = "../map_image/Iran.png";
+string image_address = "../map_image/USA.png";
 
 // country class constructor
 Country::Country() {
@@ -17,6 +17,7 @@ void Country::mapGenerator() {
         cout<<"Error loading the map"<<endl;
         exit(0);
     }
+    resize(countryMap, countryMap, cv::Size(1080, 720), 0.75, 0.75);
 }
 
 // map matrix accessor
